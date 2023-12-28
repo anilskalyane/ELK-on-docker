@@ -1,0 +1,39 @@
+name: filebeat
+setup.template:
+  enabled: true
+output.elasticsearch.username: ${ELASTIC_USERNAME}
+output.elasticsearch.password: ${ELASTIC_PASSWORD}
+path.config: ${CONFIG_DIR}
+
+filebeat.inputs:
+#    - type: tcp
+#      enabled: true
+#      max_message_size: 10MiB
+#      host: "filebeat:9000"
+ - type: log
+   enabled: true
+   paths:
+     - /usr/share/logs/prod/audittrails/*.json
+     #- /usr/share/logs/prod/audittrails-filebeat-test/*.json
+     
+   scan_frequency: 1s
+   close_inactive: 1m
+   clean_inactive: 60m
+   ignore_older: 30m
+   harvester_limit: 2000
+   close_eof: true
+   close_enabled: true
+
+output.logstash:
+    enabled: true
+    hosts: ["logstash:5045"]
+    ssl.certificate_authorities: ["${CONFIG_DIR}/ca.crt"]
+    ssl.certificate: "${CONFIG_DIR}/filebeat.crt"
+    ssl.key: "${CONFIG_DIR}/filebeat.key"
+  
+output.elasticsearch:
+  enabled: false
+  hosts: ["https://elasticsearch:9200"]
+  ssl.certificate_authorities: ["${CONFIG_DIR}/ca.crt"]
+  ssl.certificate: "${CONFIG_DIR}/filebeat.crt"
+  ssl.key: "${CONFIG_DIR}/filebeat.key"
