@@ -2,6 +2,10 @@
 
 [![Elastic Stack version](https://img.shields.io/badge/Elastic%20Stack-7.11.2-00bfb3?style=flat&logo=elastic-stack)](https://www.elastic.co/blog/category/releases)
 
+[](https://raw.githubusercontent.com/wiki/swimlane/elk-tls-docker/images/elk-tls-docker-diagram.png)
+
+This docker-compose project will assist with setting up and creating an ELK stack using either self-signed TLS certificates or using LetsEncrypt certificates for communications.  In general, you get HTTPS for all services.
+
 Run the latest version of the [Elastic stack][elk-stack] with Docker and Docker Compose.
 
 It gives you the ability to analyze any data set by using the searching/aggregation capabilities of Elasticsearch and
@@ -141,7 +145,7 @@ If you are starting the stack for the very first time, please read the section b
 
 Elasticsearch data is persisted inside a volume by default.
 
-In order to entirely shutdown the stack and remove all persisted data, use the following Docker Compose command:
+To entirely shutdown the stack and remove all persisted data, use the following Docker Compose command:
 
 ```console
 $ docker-compose down -v
@@ -330,7 +334,7 @@ To add plugins to any ELK component you have to:
 A few extensions are available inside the [`extensions`](extensions) directory. These extensions provide features which
 are not part of the standard Elastic stack, but can be used to enrich it with extra integrations.
 
-The documentation for these extensions is provided inside each individual subdirectory, on a per-extension basis. Some
+The documentation for these extensions is provided inside each subdirectory, on a per-extension basis. Some
 of them require manual changes to the default ELK configuration.
 
 ## JVM tuning
@@ -342,14 +346,14 @@ memory](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/paral
 the JVM Heap Size.
 
 The startup scripts for Elasticsearch and Logstash can append extra JVM options from the value of an environment
-variable, allowing the user to adjust the amount of memory that can be used by each component:
+variable, allowing the user to adjust the amount of memory that each component can use:
 
 | Service       | Environment variable |
 |---------------|----------------------|
 | Elasticsearch | ES_JAVA_OPTS         |
 | Logstash      | LS_JAVA_OPTS         |
 
-To accomodate environments where memory is scarce (Docker for Mac has only 2 GB available by default), the Heap Size
+To accommodate environments where memory is scarce (Docker for Mac has only 2 GB available by default), the Heap Size
 allocation is capped by default to 256MB per service in the `docker-compose.yml` file. If you want to override the
 default JVM configuration, edit the matching environment variable(s) in the `docker-compose.yml` file.
 
