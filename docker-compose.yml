@@ -3,6 +3,11 @@ version: '3.5'
 # will contain all elasticsearch data.
 volumes:
   data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/ELK-DATA
 
 secrets:
   ca.crt:
@@ -278,7 +283,7 @@ services:
       - source: ca.crt
         target: /ca.crt
     ports:
-      - "22:22" 
+      - "2222:22" 
     networks:
       - elk
     depends_on: 

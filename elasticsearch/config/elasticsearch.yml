@@ -11,3 +11,4 @@ network.host: 0.0.0.0
 xpack.license.self_generated.type: trial #basic
 xpack.security.enabled: true
 xpack.monitoring.collection.enabled: true
+#xpack.encrypted_saved_objects.encryptionKey: "FtTTBo2CWOhgiTStua+vdlpNh4CSG5JZIgnPk4NqwZE="

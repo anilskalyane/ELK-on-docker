@@ -16,7 +16,8 @@ BUNDLE_ZIP=$OUTPUT_DIR/bundle.zip
 CERT_KEYSTORES_ZIP=$OUTPUT_DIR/cert_keystores.zip
 HTTP_ZIP=$OUTPUT_DIR/http.zip
 
-yum install unzip openssl -y
+#yum install unzip openssl -y
+apt-get install -y unzip openssl
 
 create_self_signed_ca()
 {

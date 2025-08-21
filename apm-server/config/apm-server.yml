@@ -29,7 +29,7 @@ max_procs: 2
 setup:
   template:
     enabled: true
-    name: "phable-apm-server"
+    name: "apm-server"
     pattern: "*-api-apm-*-*"
 
 
